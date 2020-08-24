@@ -5,6 +5,10 @@ defmodule OmnixentServerWeb.ApiController do
     json conn, %{success: true}
   end
 
+  def availability(conn, _params) do
+    json conn, %{success: true, result: Omnixent.Core.availability}
+  end
+
   def search(conn, params) do
     with {:ok, params} <- get_search_params(params),
          result <- make_search(params) do

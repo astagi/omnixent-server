@@ -8,8 +8,9 @@ defmodule OmnixentServerWeb.Router do
   scope "/api", OmnixentServerWeb do
     pipe_through :api
 
-    get "/", ApiController, :index
-    get "/v1/search", ApiController, :search
+    get "/",                ApiController, :index
+    get "/v1/availability", ApiController, :availability
+    get "/v1/search",       ApiController, :search
 
   end
 end

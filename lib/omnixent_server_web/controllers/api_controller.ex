@@ -11,7 +11,7 @@ defmodule OmnixentServerWeb.ApiController do
 
   def search(conn, params) do
     with {:ok, params} <- get_search_params(params),
-         result <- make_search(params) do
+         result        <- make_search(params) do
 
       json conn, %{success: true, result: result}
     else
@@ -21,10 +21,10 @@ defmodule OmnixentServerWeb.ApiController do
   end
 
   defp get_search_params(params) do
-    term    = Map.get(params, "term")    || ""
-    service = Map.get(params, "service") || ""
-    lang    = Map.get(params, "lang")    || "en"
-    country = Map.get(params, "country") || "us"
+    term    = (params |> Map.get("term")) || ""
+    service = (params |> Map.get("service") |> String.to_atom) || ""
+    lang    = (params |> Map.get("lang")    |> String.to_atom) || :en
+    country = (params |> Map.get("country") |> String.to_atom) || :us
 
     cond do
       term == ""    ->
@@ -35,9 +35,9 @@ defmodule OmnixentServerWeb.ApiController do
         {:ok,
           %{
             term:    term,
-            service: String.to_atom(service),
-            lang:    String.to_atom(lang),
-            country: String.to_atom(country)
+            service: service,
+            lang:    lang,
+            country: country
           }
         }
     end

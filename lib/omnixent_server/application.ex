@@ -6,6 +6,7 @@ defmodule OmnixentServer.Application do
   use Application
 
   def start(_type, _args) do
+
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
@@ -26,4 +27,5 @@ defmodule OmnixentServer.Application do
     OmnixentServerWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
 end

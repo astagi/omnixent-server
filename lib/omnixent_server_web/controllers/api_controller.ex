@@ -29,7 +29,7 @@ defmodule OmnixentServerWeb.ApiController do
     cond do
       term == ""    ->
         {:error, "'term' parameter is required"}
-      service == "" -> 
+      service == "" ->
         {:error, "'service' parameter is required"}
       true ->
         {:ok,
@@ -47,8 +47,8 @@ defmodule OmnixentServerWeb.ApiController do
     Omnixent.Services.search(
       p.term,
       p.service,
-      p.lang,
-      p.country
+      p.country,
+      p.lang
     )
   end
 

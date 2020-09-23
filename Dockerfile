@@ -12,4 +12,7 @@ WORKDIR ${APP_HOME}
 
 RUN mix local.hex --force && mix local.rebar --force && mix deps.get && mix deps.compile
 
+ENV MIX_ENV=prod
+ENV PORT=4000
+
 CMD ["./run_server.sh"]

@@ -13,5 +13,15 @@ defmodule OmnixentServerWeb.Router do
     get "/v1/availability", ApiController, :availability
     get "/v1/search",       ApiController, :search
 
+    
   end
+
+  scope "/graphql" do
+    forward "/ui", Absinthe.Plug.GraphiQL,
+    schema: OmnixentServerWeb.Schema
+    
+    forward "/", Absinthe.Plug,
+    schema: OmnixentServerWeb.Schema
+  end
+
 end

@@ -4,4 +4,16 @@ defmodule OmnixentServerWeb.Resolvers.Content do
     {:ok, Omnixent.Core.availability}
   end
 
+  def get_search(_parent, %{term: term, country: country, language: language, service: service}, _resolution) do
+
+    result = Omnixent.Services.search(
+      term,
+      :"#{service}",
+      :"#{country}",
+      :"#{language}"
+    )
+
+    {:ok, result}
+  end
+
 end

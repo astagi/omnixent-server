@@ -5,6 +5,8 @@ services:
     build: .
     ports:
       - "4000:4000"
+    environment:
+      - SECRET_KEY_BASE=deVk3yG3n3r4T3Y0urOWnK3yT0U5e1nPr0DUct10n
     volumes:
       - ./Mnesia.nonode@nohost:/app/Mnesia.nonode@nohost
       - ./priv:/app/priv

@@ -43,6 +43,19 @@ defmodule OmnixentServerWeb.ApiController do
     end
   end
 
+  def search_uuid(conn, params) do
+    uuid = Map.get(params, "uuid")
+    with {:true, results} <- make_search(uuid) do
+      json conn, %{success: true, result: format_result(results)}
+    else
+      _ -> json conn, %{success: false, reason: "UUID not found"}
+    end
+  end
+
+  defp make_search(uuid) when is_binary(uuid) do
+    Omnixent.Mnesia.get_by_uuid(uuid)
+  end
+
   defp make_search(p) do
     Omnixent.Services.search(
       p.term,
@@ -50,6 +63,35 @@ defmodule OmnixentServerWeb.ApiController do
       p.country,
       p.lang
     )
+  end
+
+  # This will be removed with the next release.
+  defp format_result(result) do
+    first_res   = result |> hd
+    term        = first_res.term
+    date        = first_res.date
+    service     = first_res.service
+    country     = first_res.country
+    language    = first_res.language
+    search_uuid = first_res.uuid
+
+    filtered_results = Enum.map(result, fn res ->
+      %{
+        id:     res.id,
+        date:   res.date,
+        term:   res.term,
+        result: res.result
+      }
+    end)
+    
+    %{
+      uuid:     search_uuid,
+      term:     term,
+      service:  service,
+      country:  country,
+      language: language,
+      result:   filtered_results
+    }
   end
 
 end

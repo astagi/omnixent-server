@@ -12,7 +12,7 @@ defmodule OmnixentServerWeb.Router do
     get "/",                ApiController, :index
     get "/v1/availability", ApiController, :availability
     get "/v1/search",       ApiController, :search
-
+    get "/v1/search/:uuid", ApiController, :search_uuid
     
   end
 

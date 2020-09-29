@@ -40,7 +40,7 @@ defmodule OmnixentServer.MixProject do
       {:cors_plug, "~> 1.5"},
       {:absinthe, "~> 1.5", override: true},
       {:absinthe_plug, "~> 1.5.0"},
-      {:omnixent, "~> 0.0.5"}
+      {:omnixent, "~> 0.0.6"}
     ]
   end
 end
